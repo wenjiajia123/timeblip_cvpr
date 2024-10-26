@@ -1,0 +1,69 @@
+base_cfg_path: configs/train_qvlights.yml
+
+dset_type: mr
+dset_name: qvhighlights
+clip_length: 1
+
+gpu_id: 0
+num_workers: 16
+
+exp_id: base1024_10_f10_b10g1_s0.05_0.01
+model_id: univtg
+
+bsz: 1
+eval_bsz: 4
+n_epoch: 200
+lr: 0.0001
+lr_drop: 80
+lr_warmup: 10
+wd: 0.0001
+
+input_dropout: 0.5
+dropout: 0
+droppath: 0.1
+
+eval_epoch: 1
+enc_layers: 4
+eval_mode: add
+round_multiple: -1
+hidden_dim: 1024
+eval_id: 0
+eval_results_dir: eval_results
+eval_init: False
+
+b_loss_coef: 10
+g_loss_coef: 1
+h_loss_coef: 1
+eos_coef: 0.1
+f_loss_coef: 10
+s_loss_intra_coef: 0.05
+s_loss_inter_coef: 0.01
+weakly_loss_intra: 1
+weakly_loss_inter: 1
+
+main_metric: MR-full-mAP-key
+nms_thd: 0.7
+max_before_nms: 1000
+max_after_nms: 10
+
+ctx_mode: video_tef
+v_feat_types: slowfast_clip
+t_feat_type: clip
+use_cache: -1
+easy_negative_only: 1
+
+resume:
+
+######## data paths
+train_path: /mnt/bn/duanbaishan-data/gengwenjia/dataset/qvhighlights/metadata/qvhighlights_train.jsonl
+eval_path: /mnt/bn/duanbaishan-data/gengwenjia/dataset/qvhighlights/metadata/qvhighlights_val.jsonl
+train_image_root: /mnt/bn/duanbaishan-data/gengwenjia/dataset/qvhighlights/raw_data/images/train
+eval_image_root: /mnt/bn/duanbaishan-data/gengwenjia/dataset/qvhighlights/raw_data/images/val
+eval_split_name: val
+feat_root: /mnt/bn/duanbaishan-data/gengwenjia/dataset/qvhighlights
+
+# video features
+v_feat_dirs: [/mnt/bn/duanbaishan-data/gengwenjia/dataset/qvhighlights/vid_slowfast, /mnt/bn/duanbaishan-data/gengwenjia/dataset/qvhighlights/vid_clip]
+v_feat_dim: 2816
+t_feat_dir: /mnt/bn/duanbaishan-data/gengwenjia/dataset/qvhighlights/txt_clip
+t_feat_dim: 512
